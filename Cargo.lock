@@ -934,17 +934,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "publisher"
-version = "0.1.0"
-dependencies = [
- "borsh",
- "borsh-derive",
- "crosstown_bus",
- "futures",
- "tokio",
-]
-
-[[package]]
 name = "quick-error"
 version = "1.2.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1174,6 +1163,17 @@ checksum = "05ffd9c0a93b7543e062e759284fcf5f5e3b098501104bfbdde4d404db792871"
 dependencies = [
  "libc",
  "windows-sys 0.52.0",
+]
+
+[[package]]
+name = "subscriber"
+version = "0.1.0"
+dependencies = [
+ "borsh",
+ "borsh-derive",
+ "crosstown_bus",
+ "futures",
+ "tokio",
 ]
 
 [[package]]

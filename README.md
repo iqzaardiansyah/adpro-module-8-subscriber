@@ -21,4 +21,22 @@
 
     So, in summary, guest:guest@localhost:5672 specifies the username, password, hostname, and port of the AMQP server that the code will connect to.
 
+![Screenshot of running code on console and delayed spike on RabbitMQ](https://i.ibb.co/rGJgTrz/gambar-2024-04-18-175549622.png)
+
+The total number of queues in RabbitMQ is determined by several factors, including the configuration of the message broker, the number of bindings, and the behavior of the publisher and subscriber applications.
+
+Here are some reasons why the total number of queues might differ between your machine (with 2 queues) and another machine (with 20 queues):
+
+1. **Bindings**: Each queue in RabbitMQ is typically bound to one or more exchanges. If there are more bindings on the other machine, it could result in more queues being created.
+
+2. **Subscriber Behavior**: The behavior of the subscriber application can influence the creation of queues. In your case, the subscriber application has a delay of 10 milliseconds (`thread::sleep(ten_millis);`) before processing each message. During this delay, messages might accumulate in RabbitMQ, potentially leading to the creation of additional queues if they are not processed quickly enough.
+
+3. **Message Volume**: The volume of messages being published and consumed can impact the creation of queues. If there are more messages being published or consumed on the other machine, it might lead to the creation of additional queues to handle the workload.
+
+4. **Configuration Differences**: Differences in RabbitMQ configuration between your machine and the other machine, such as queue TTL (Time-To-Live) settings or queue auto-delete behavior, could result in different queue creation behavior.
+
+5. **Other Applications**: There might be other applications or components interacting with RabbitMQ on the other machine, leading to the creation of additional queues for different purposes.
+
+To determine the exact reason for the difference in the total number of queues between your machine and the other machine, it would be necessary to inspect the RabbitMQ configuration, monitor the message flow, and analyze the behavior of all interacting applications.
+
 </details>
