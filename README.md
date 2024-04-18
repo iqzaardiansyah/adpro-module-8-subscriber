@@ -39,4 +39,25 @@ Here are some reasons why the total number of queues might differ between your m
 
 To determine the exact reason for the difference in the total number of queues between your machine and the other machine, it would be necessary to inspect the RabbitMQ configuration, monitor the message flow, and analyze the behavior of all interacting applications.
 
+![Screenshot of three running subscribers](https://i.ibb.co/71L8Wkc/Screenshot-46.png)
+![Screenshot of RabbitMQ responding to three running subscribers](https://i.ibb.co/G9Fv0qJ/gambar-2024-04-18-180552767.png)
+
+The reason why running three subscribers with a delay of 10ms each might appear faster than running one subscriber with the same delay is due to concurrency and parallelism.
+
+When you have three subscribers running concurrently, each handling messages with a delay of 10ms, they can process messages in parallel. This means that while one subscriber is waiting for the delay, the other two subscribers can continue processing messages. As a result, the overall time to process all messages might be shorter compared to a single subscriber handling messages sequentially.
+
+In contrast, when you have only one subscriber running, it has to handle all messages sequentially, one after the other, with each message introducing a delay of 10ms. This can lead to a longer total processing time because each message must wait for the previous one to finish processing before it can be handled.
+
+Regarding the code improvement, there's nothing particularly inefficient in the provided code snippets for the publisher and subscriber. However, there are a few suggestions for improvement:
+
+1. **Concurrency**: If your system can benefit from concurrent processing, you might consider implementing concurrency in your subscriber code using threads or asynchronous programming. This way, you can handle multiple messages concurrently, potentially improving performance.
+
+2. **Error Handling**: Ensure robust error handling in both the publisher and subscriber code to handle potential failures gracefully and prevent message loss or system instability.
+
+3. **Logging**: Consider using a logging framework to log messages and errors instead of directly printing to the console. This provides better control over log levels, formatting, and output destinations.
+
+4. **Configuration**: Make sure your RabbitMQ server is properly configured for optimal performance and reliability, considering factors such as queue settings, message persistence, and clustering if applicable.
+
+By optimizing these aspects of your code and configuration, you can potentially improve the overall performance and reliability of your messaging system.
+
 </details>
